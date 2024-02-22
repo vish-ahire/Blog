@@ -16,7 +16,8 @@ function PostForm({ post }) {
         }
     })
     const navigate = useNavigate()
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector(state => state.auth.userData)
+    console.log(userData) 
     const submit = async (data) => {
         if (post) {
             const file = data.image[0] ? service.uploadFile(data.image[0]) : null
@@ -33,7 +34,8 @@ function PostForm({ post }) {
             if (file) {
                 const fileId = file.$id
                 data.featuredImage = fileId
-                const dbPost = await service.createPost({ ...data, userId: userData.$id })
+                const dbPost = await service.createPost({ ...data, userId: userData.$id });
+                   
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`)
                 }
@@ -46,14 +48,14 @@ function PostForm({ post }) {
          return ''
     })
     React.useEffect(()=>{
-        const subscription= watch((value,{name})=>{
-            if(name==='title'){
-                setValue('slug',slugTranform(value.title, {shouldValidate:true}))
+        const subscription = watch((value, { name }) => {
+            if (name === "title") {
+                setValue("slug", slugTranform(value.title), { shouldValidate: true });
             }
-        })
-
-        return ()=>subscription.unsubscribe()
+        });
+        return () => subscription.unsubscribe();
     },[watch,slugTranform,setValue])
+    console.log('first')
     return (
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
             <div className="w-2/3 px-2">
@@ -69,7 +71,7 @@ function PostForm({ post }) {
                     className="mb-4"
                     {...register("slug", { required: true })}
                     onInput={(e) => {
-                        setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
+                        setValue("slug", slugTranform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />

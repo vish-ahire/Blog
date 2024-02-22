@@ -31,14 +31,14 @@ export class AuthSerice {
         try {
             return await this.account.createEmailSession(email,password)
         } catch (error) {
-            console.warn(error);
+            console.error('#####'+error.message);
         }
     }
     async getCurrentUser(){
         try {
-             await this.account.get();
+           return  await this.account.get();
         } catch (error) {
-            console.log(error);
+            console.log("@@@@@@@@"+error.message);
         }
     }
     async logOut(){

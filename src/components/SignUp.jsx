@@ -22,6 +22,7 @@ function Signup() {
                 navigate("/")
             }
         } catch (error) {
+            console.log("errr",error)
             setError(error.message)
         }
     }
@@ -74,7 +75,7 @@ function Signup() {
                         {...register("password", {
                             required: true,})}
                         />
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full" >
                             Create Account
                         </Button>
                     </div>
