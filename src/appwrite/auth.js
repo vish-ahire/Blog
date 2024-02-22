@@ -17,7 +17,7 @@ export class AuthSerice {
 
             if (userAccount) {
                 // call another method
-                return this.login({email, password});
+                return this.logIn({email, password});
             } else {
                return  userAccount;
             }
