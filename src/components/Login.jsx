@@ -5,6 +5,7 @@ import { Button, Input } from '../components'
 import { useDispatch } from 'react-redux'
 import authService, { AuthSerice } from '../appwrite/auth'
 import { useForm } from 'react-hook-form'
+import {Logo} from '../components'
 function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -21,7 +22,7 @@ function Login() {
                 navigate('/')
             }
         } catch (error) {
-            setError(error.message)
+            setError("25",error.message)
         }
     }
 

@@ -13,10 +13,17 @@ export class AuthSerice {
 
     async createAccount({email,name,password}){
         try {
-            const userAccount=await this.account.create(ID.unique,email,password,name)
+            const userAccount=await this.account.create(ID.unique(),email,password,name)
 
-            userAccount?console.log(userAccount):console.log(userAccount+" asd")
+            if (userAccount) {
+                // call another method
+                return this.login({email, password});
+            } else {
+               return  userAccount;
+            }
+            
         } catch (error) {
+            console.log("Helloow w")
             throw error
         }
     }
