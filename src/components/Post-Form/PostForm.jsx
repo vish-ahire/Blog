@@ -16,8 +16,9 @@ function PostForm({ post }) {
         }
     })
     const navigate = useNavigate()
-    const userData = useSelector(state => state.auth.userData)
-    console.log(userData) 
+    const userData = useSelector((state) => state.auth.userData);
+    
+    console.log(userData,userData.$id) 
     const submit = async (data) => {
         if (post) {
             const file = data.image[0] ? service.uploadFile(data.image[0]) : null
@@ -34,7 +35,7 @@ function PostForm({ post }) {
             if (file) {
                 const fileId = file.$id
                 data.featuredImage = fileId
-                const dbPost = await service.createPost({ ...data, userId: userData.$id });
+                const dbPost = await service.createPost({ ...data, userid: userData.$id});
                    
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`)
@@ -43,8 +44,8 @@ function PostForm({ post }) {
         }
     }
     const slugTranform=useCallback(value=>{
-        if(value && typeof(value)==='string')
-        return value.trim().toLowerCase().replace(/[^a-z0-9]/g, '-').replace
+        if(value && typeof value ==='string')
+        return value.trim().toLowerCase().replace(/[^a-z0-9]/g, '-')
          return ''
     })
     React.useEffect(()=>{
